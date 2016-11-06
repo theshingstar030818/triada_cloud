@@ -27,7 +27,15 @@ function getUser(userId)
     var userQuery = new Parse.Query(Parse.User);
     userQuery.equalTo("objectId", userId);
     userQuery.include("information");
+    userQuery.include("information.governmentId1");
+    userQuery.include("information.governmentId2");
+    userQuery.include("information.profilePhoto");
+    userQuery.include("information.primaryContact");
+    userQuery.include("information.primaryContact.currentAddress");
+    userQuery.include("information.secondaryContact");
+    userQuery.include("information.secondaryContact.currentAddress");
     userQuery.include("company");
+    userQuery.include("company.logo");
     userQuery.include("locationHistory");
     //Here you aren't directly returning a user, but you are returning a function that will $
     return userQuery.find
