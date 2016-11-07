@@ -20,11 +20,11 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
         function(_user)
         {
             console.log("_user : " +_user);
-            // file.set("file", parseFile);
-            // file.set("fileDescription", "profile picture file");
-            // file.set("isDeleted", false);
+            file.set("file", parseFile);
+            file.set("fileDescription", "profile picture file");
+            file.set("isDeleted", false);
 
-            // file.set("user", _user);
+            file.set("user", _user);
 
             // //set access control 
             // var acl = new Parse.ACL();
