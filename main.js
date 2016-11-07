@@ -2,6 +2,63 @@
 Parse.Cloud.define("uploadProfilePicture", function(request, response) 
 {
     console.log(request.params);
+    Parse.Cloud.useMasterKey();
+    
+    var user = request.params.user;
+    var decodedData = request.params.src;
+    
+    var base64 = request.params.encodedData;
+    var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, { base64: base64 });
+
+    var fileCollection = Parse.Object.extend("File");
+    var file = new fileCollection();
+
+    //When getUser(id) is called a promise is returned. Notice the .then this means that onc$
+    getUser(user.objectId).then
+    (   
+        //When the promise is fulfilled function(user) fires, and now we have our USER!
+        function(_user)
+        {
+            file.set("file", parseFile);
+            file.set("fileDescription", "profile picture file");
+            file.set("isDeleted", false);
+
+            file.set("user", _user);
+
+            //set access control 
+            var acl = new Parse.ACL();
+            acl.setReadAccess(_user.id,true);
+            acl.setWriteAccess(_user.id,true);
+
+            acl.setRoleReadAccess("superAdmins",true);
+            acl.setRoleWriteAccess("superAdmins",true);
+
+            if(_user.get("company") != undefined){
+                file.set("company", company);
+                acl.setReadAccess(company.id,true);
+                acl.setWriteAccess(company.id,true);
+            }
+
+            file.setACL(acl);
+
+            file.save(null, {
+                success: function(file) {
+                    console('profile picture object saved with objectId: ' + file.id);
+                    response.success(file);
+                },
+                error: function(file, error) {
+                    alert('Failed to create new object, with error code: ' + error.message);
+                }
+            });
+        }
+        ,
+        function(error)
+        {
+            response.error(error);
+        }
+    );
+
+    
 });
 
 
