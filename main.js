@@ -40,9 +40,10 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
                 acl.setReadAccess(company.id,true);
                 acl.setWriteAccess(company.id,true);
             }
+            
+            file.setACL(acl);
+            console.log("sending back success");
             response.success("success");
-            // file.setACL(acl);
-
             // file.save(null, {
             //     success: function(file) {
             //         console('profile picture object saved with objectId: ' + file.id);
