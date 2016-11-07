@@ -20,7 +20,9 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
         function(_user)
         {
             console.log("_user :>>>>>>> " + JSON.stringify(_user[0]));
-            
+            console.log("_user.objectId :>>>>>>> " + JSON.stringify(_user[0]).objectId);
+            console.log("_user.user.objectId :>>>>>>> " + JSON.stringify(_user[0]).user.objectId);
+            console.log("_user.user :>>>>>>> " + JSON.stringify(_user[0]).user);
             
             // file.set("file", parseFile);
             // file.set("fileDescription", "profile picture file");
