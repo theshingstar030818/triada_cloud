@@ -20,33 +20,32 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
         function(_user)
         {
             
-            console.log(JSON.parse(JSON.stringify(_user[0])).username);
-            console.log(JSON.parse(JSON.stringify(_user[0])).id);
-            console.log(JSON.parse(JSON.stringify(_user[0])).objectId);
+            var userID = (JSON.parse(JSON.stringify(_user[0])).objectId);
+            var company = (JSON.parse(JSON.stringify(_user[0])).company);
             
             
-            // file.set("file", parseFile);
-            // file.set("fileDescription", "profile picture file");
-            // file.set("isDeleted", false);
+            file.set("file", parseFile);
+            file.set("fileDescription", "profile picture file");
+            file.set("isDeleted", false);
 
-            // file.set("user", _user[0]);
+            file.set("user", _user[0]);
 
-            // //set access control 
-            // var acl = new Parse.ACL();
-            // acl.setReadAccess(_user[0].id,true);
-            // acl.setWriteAccess(_user[0].id,true);
+            //set access control 
+            var acl = new Parse.ACL();
+            acl.setReadAccess(userID,true);
+            acl.setWriteAccess(userID,true);
 
-            // acl.setRoleReadAccess("superAdmins",true);
-            // acl.setRoleWriteAccess("superAdmins",true);
+            acl.setRoleReadAccess("superAdmins",true);
+            acl.setRoleWriteAccess("superAdmins",true);
 
-            // if(_user.get("company") != undefined){
-            //     console.log("company object found");
-            //     file.set("company", company);
-            //     acl.setReadAccess(company.id,true);
-            //     acl.setWriteAccess(company.id,true);
-            // }
+            if(company != undefined){
+                console.log("company object found");
+                file.set("company", company);
+                acl.setReadAccess(company.id,true);
+                acl.setWriteAccess(company.id,true);
+            }
             
-            // file.setACL(acl);
+            file.setACL(acl);
             console.log("sending back success");
             // response.success("success");
             // file.save(null, {
