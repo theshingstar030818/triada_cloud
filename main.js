@@ -19,17 +19,17 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
         //When the promise is fulfilled function(user) fires, and now we have our USER!
         function(_user)
         {
-            console.log("_user : " +_user.id);
+            console.log("_user : " +_user.objectId);
             file.set("file", parseFile);
             file.set("fileDescription", "profile picture file");
             file.set("isDeleted", false);
 
             file.set("user", _user);
 
-            // //set access control 
-            // var acl = new Parse.ACL();
-            // acl.setReadAccess(_user.id,true);
-            // acl.setWriteAccess(_user.id,true);
+            //set access control 
+            var acl = new Parse.ACL();
+            acl.setReadAccess(_user.objectId,true);
+            acl.setWriteAccess(_user.objectId,true);
 
             // acl.setRoleReadAccess("superAdmins",true);
             // acl.setRoleWriteAccess("superAdmins",true);
