@@ -1,7 +1,6 @@
 
 Parse.Cloud.define("uploadProfilePicture", function(request, response) 
 {
-    console.log(request.params);
     Parse.Cloud.useMasterKey();
     
     var user = request.params.user;
