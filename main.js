@@ -19,10 +19,8 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
         //When the promise is fulfilled function(user) fires, and now we have our USER!
         function(_user)
         {
-            console.log("_user :>>>>>>> " + JSON.stringify(_user[0]));
-            console.log("_user.objectId :>>>>>>> " + JSON.stringify(_user[0]).objectId);
-            console.log("_user.id :>>>>>>> " + JSON.stringify(_user[0]).id);
-            console.log("_user.user :>>>>>>> " + JSON.stringify(_user[0]).user);
+            console.log("_user :>>>>>>> " + JSON.stringify(_user[0]).username);
+           
             
             // file.set("file", parseFile);
             // file.set("fileDescription", "profile picture file");
