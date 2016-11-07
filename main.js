@@ -43,18 +43,21 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
                 file.set("company", company);
                 acl.setReadAccess(company.id,true);
                 acl.setWriteAccess(company.id,true);
+            }else{
+                console.log("company object not found");
             }
             
             file.setACL(acl);
-            file.save(null, {
-                success: function(file) {
-                    console('profile picture object saved with objectId: ' + file.id);
-                    response.success(file);
-                },
-                error: function(file, error) {
-                    alert('Failed to create new object, with error code: ' + error.message);
-                }
-            });
+            console.log("file.setACL(acl);");
+            // file.save(null, {
+            //     success: function(file) {
+            //         console('profile picture object saved with objectId: ' + file.id);
+            //         response.success(file);
+            //     },
+            //     error: function(file, error) {
+            //         alert('Failed to create new object, with error code: ' + error.message);
+            //     }
+            // });
         }
         ,
         function(error)
