@@ -1,4 +1,10 @@
 
+Parse.Cloud.define("uploadProfilePicture", function(request, response) 
+{
+    console.log(request.params);
+});
+
+
 Parse.Cloud.define("getUser", function(request, response) 
 {
     //Example where an objectId is passed to a cloud function.
