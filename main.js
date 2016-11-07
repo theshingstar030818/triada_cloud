@@ -48,16 +48,17 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
             }
             
             file.setACL(acl);
-            console.log("file.setACL(acl);");
-            // file.save(null, {
-            //     success: function(file) {
-            //         console('profile picture object saved with objectId: ' + file.id);
-            //         response.success(file);
-            //     },
-            //     error: function(file, error) {
-            //         alert('Failed to create new object, with error code: ' + error.message);
-            //     }
-            // });
+
+            file.save(null, {
+                success: function(file) {
+                    console('profile picture object saved with objectId: ' + file.id);
+                    response.success(file);
+                },
+                error: function(file, error) {
+                    console.log('Failed to create new object, with error code: ' + error.message);
+                    response.error(error);
+                }
+            });
         }
         ,
         function(error)
