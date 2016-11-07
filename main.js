@@ -19,7 +19,7 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
         //When the promise is fulfilled function(user) fires, and now we have our USER!
         function(_user)
         {
-            console.log("_user : " +_user);
+            console.log("_user : " +_user.id);
             file.set("file", parseFile);
             file.set("fileDescription", "profile picture file");
             file.set("isDeleted", false);
