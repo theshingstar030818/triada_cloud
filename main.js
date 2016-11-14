@@ -122,6 +122,7 @@ function getUser(userId)
         {
             //When the success method fires and you return userRetrieved you fulfill the abo$
             console.log("userRetrieved : " + userRetrieved);
+            console.log("user information object : " + userRetrieved.get("Information").toJSON());
             return userRetrieved;
         },
         error: function(error)
