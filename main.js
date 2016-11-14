@@ -1,19 +1,15 @@
 
-Parse.Cloud.define("uploadProfilePicture", function(request, response) 
+Parse.Cloud.define("uploadFile", function(request, response) 
 {
     Parse.Cloud.useMasterKey();
     
     var user = request.params.user;
     var decodedData = request.params.src;
     
-    var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, { base64: decodedData });
-
-
+    var parseFile = new Parse.File( request.params.fileType + "_"+user.objectId+ request.params.ext, { base64: decodedData });
     var fileCollection = Parse.Object.extend("File");
     var file = new fileCollection();
 
-    console.log("user.objectId : " + user.objectId);
-    //When getUser(id) is called a promise is returned. Notice the .then this means that onc$
     getUser(user.objectId).then
     (   
         //When the promise is fulfilled function(user) fires, and now we have our USER!
