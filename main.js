@@ -51,7 +51,18 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
             file.save(null, {
                 success: function(file) {
                     console.log("successfully uploaded profile picture");
-                    response.success(file);
+                    _user[0].set("profilePhoto", file);
+                    _user[0].save(null, {
+                        success: function(){
+                            console.log("successfully changed to new profile picture");
+                            response.success(file);
+                        },
+                        error: function(){
+                            console.log('Failed to create new profile picture object, with error code: ' + error.message);
+                            response.error(error);
+                        }
+                    });
+                    
                 },
                 error: function(file, error) {
                     console.log('Failed to create new profile picture object, with error code: ' + error.message);
