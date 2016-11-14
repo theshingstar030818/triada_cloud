@@ -48,13 +48,15 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
             }
             
             file.setACL(acl);
-            file.save().then(function() {
-                console('profile picture object saved with objectId: ' + file.id);
+            file.save(null, {
+                success: function(file) {
+                    console.log("successfully uploaded profile picture");
                     response.success(file);
-            }, function(error) {
-                console.log("file not");
-                response.error(error);
-                // The file either could not be read, or could not be saved to Parse.
+                },
+                error: function(file, error) {
+                    console.log('Failed to create new profile picture object, with error code: ' + error.message);
+                    response.error(error);
+                }
             });
             
             // file.save(null, {
