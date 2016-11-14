@@ -4,12 +4,9 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
     Parse.Cloud.useMasterKey();
     
     var user = request.params.user;
-    var decodedData = request.params.src;
+    var  = request.params.src;
     
-    //var base64 = request.params.encodedData;
-    //var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, { base64: base64 });
-
-    var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, decodedData);
+    var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, { base64: decodedData });
 
 
     var fileCollection = Parse.Object.extend("File");
