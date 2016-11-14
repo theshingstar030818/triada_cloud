@@ -47,7 +47,7 @@ Parse.Cloud.define("uploadFile", function(request, response)
             file.save(null, {
                 success: function(file) {
                     console.log("successfully uploaded profile picture");
-                    _user[0].set("profilePhoto", file);
+                    _user[0].get("Information").set("profilePhoto", file);
                     _user[0].save(null, {
                         success: function(){
                             console.log("successfully changed to new profile picture");
