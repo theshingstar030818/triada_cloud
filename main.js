@@ -6,8 +6,11 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
     var user = request.params.user;
     var decodedData = request.params.src;
     
-    var base64 = request.params.encodedData;
-    var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, { base64: base64 });
+    //var base64 = request.params.encodedData;
+    //var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, { base64: base64 });
+
+    var parseFile = new Parse.File("profilePicture_"+user.objectId+ request.params.ext, decodedData);
+
 
     var fileCollection = Parse.Object.extend("File");
     var file = new fileCollection();
@@ -69,17 +72,6 @@ Parse.Cloud.define("uploadProfilePicture", function(request, response)
                     response.error(error);
                 }
             });
-            
-            // file.save(null, {
-            //     success: function(file) {
-            //         console('profile picture object saved with objectId: ' + file.id);
-            //         response.success(file);
-            //     },
-            //     error: function(file, error) {
-            //         console.log('Failed to create new object, with error code: ' + error.message);
-            //         response.error(error);
-            //     }
-            // });
         }
         ,
         function(error)
